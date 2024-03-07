@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <math.h>
+double f(int n){
+    double h,i,x,f,intgr =0;
+    double a=0;
+    double b=2;
+    h=(b-a)/n;
+    for(i=0; i<n;i++)
+    {
+        x=a+i*h+h*0.5;
+        if (x<=1)
+            f= 8*pow(x,3)*cos(x);
+        else
+            f=log(1+sqrt(x))-cos(x);
+        intgr += f;
+    }
+    intgr *=h;
+    return intgr;
+}
+int main(){
+    double e;
+    printf("Enter e>\n");
+    scanf("%lf", &e);
+    int n=1;
+    double intgr1=0;
+    double intgr2=2;
+    while ((fabs(intgr2-intgr1)/3)>=e){
+        n*=2;
+        intgr1=intgr2;
+        intgr2=f(n*2);
+    }
+    printf("%lf\n", intgr2);
+    return 0;
+
+}
